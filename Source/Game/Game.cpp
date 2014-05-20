@@ -1,0 +1,99 @@
+#include "Game.hpp"
+#include "Camera.hpp"
+#include "Application/Application.hpp"
+#include "Application/Configuration.hpp"
+#include "Scene/Actor.hpp"
+#include "Math/Math.hpp"
+#include "Complex/Interpolation_test.hpp"
+#include "Complex/Material_test.hpp"
+#include "Complex/Shadowing_test.hpp"
+#include "Complex/Static_stress_test.hpp"
+#include "Rendering/Storage/Texture_storage_save.hpp"
+
+namespace game
+{
+
+Camera camera;
+
+scene::Light* flashlight;
+
+scene::Interpolation_test_factory interpolation_test_factory;
+scene::Material_test_factory material_test_factory;
+scene::Shadowing_test_factory shadowing_test_factory;
+scene::Static_stress_test_factory static_stress_test_factory;
+
+std::string initial_scene = "Scenes/Test.scene";
+float camera_fov = 50.f;
+
+bool on_pre_init(Application& app)
+{
+	const scripting::Script_engine& engine = app.get_script_tool().get_engine();
+		
+	engine.register_variable("string initial_scene", &initial_scene);
+
+	engine.register_variable("float camera_fov", &camera_fov);
+
+	return true;
+}
+
+bool on_post_init(Application& app)
+{
+	auto& scene = app.get_scene();
+
+	scene.get_complex_factories().register_factory(&interpolation_test_factory, "Interpolation_test");
+	scene.get_complex_factories().register_factory(&material_test_factory, "Material_test");
+    scene.get_complex_factories().register_factory(&shadowing_test_factory, "Shadowing_test");
+	scene.get_complex_factories().register_factory(&static_stress_test_factory, "Static_stress_test");
+
+	auto& camera = scene.get_camera();
+
+	float aspect_ratio = float(configuration::virtual_size.x) / float(configuration::virtual_size.y);
+	camera.set_projection(math::to_radians(camera_fov), aspect_ratio, 0.1f, 300.f, false);
+
+	camera.set_local_position(float3(0.f, 1.f, -10.f));
+		
+	if (!app.load_scene(initial_scene))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+void on_load_scene(Application& app)
+{
+	auto& scene = app.get_scene();
+	auto& resource_manager = app.get_resource_manager();
+
+	flashlight = scene.create_light(scene::Light::Type::Spot);
+	flashlight->set_casts_shadow(true);
+	flashlight->set_color(rendering::Color3(1.f, 1.f, 1.f));
+	flashlight->set_lumen(15.f);
+	flashlight->set_texture(resource_manager.load<rendering::Shader_resource_view>("Textures/Light/Flashlight_0.dds"));
+	flashlight->set_fov(math::to_radians(30.f));
+	flashlight->set_visible(false);
+}
+
+void update(Application& app)
+{
+	auto& camera = app.get_scene().get_camera();
+
+    flashlight->set_local_position(camera.get_world_position() + 0.2f * camera.get_world_direction() + -0.2f * camera.get_world_right() + -0.2f * camera.get_world_up());
+    flashlight->set_local_rotation(camera.get_local_rotation());
+    flashlight->fix_world_transformation();
+}
+
+Camera& get_camera()
+{
+	return camera;
+}
+
+void toggle_flashlight(bool just_activated, int /*data*/, float /*speed*/)
+{
+	if (just_activated)
+	{
+		flashlight->set_visible(!flashlight->is_visible());
+	}
+}
+
+}

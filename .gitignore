@@ -1,0 +1,6 @@
+build-*/
+Cache/
+Data/
+System/
+*.pro.user*
+*.fuse-hidden*
