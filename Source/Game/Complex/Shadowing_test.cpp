@@ -21,7 +21,7 @@ bool Shadowing_test::init(Scene& scene, Resource_manager& resource_manager)
 	materials[1] = resource_manager.load<Material>("Materials/Grid_2x2.material");
 
 	size_t num_x = 100;
-    size_t num_y = 10;
+ //   size_t num_y = 10;
 	size_t num_z = 100;
 
     float3 interval = float3(2.f, 1.f, 2.f);

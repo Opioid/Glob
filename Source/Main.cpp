@@ -1,6 +1,7 @@
+#include "Substitute.hpp"
 #include "Core/Core.hpp"
 
-int main()
+SUBSTITUTE_MAIN
 {
 	core::run();
 
