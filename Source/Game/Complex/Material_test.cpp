@@ -42,7 +42,8 @@ bool Material_test::init(Scene& scene, Resource_manager& resource_manager)
 			Actor* actor = scene.create_actor();
 			actor->create_surfaces(sphereModel, 1, &material);
 			actor->set_local_position(float3(1.f - float(numX) + 2.f * float(x), 1.f - float(numY) + 2.f * float(y), 13.f));
-		//	Actor->set_world_transformation(float3(1.f - float(numX) + 2.f * float(x), 1.f - float(numY) + 2.f * float(y), 13.f), float3(1.f, 1.f, 1.f), float3x3::identity);
+			actor->set_local_scale(float3(1.f, 1.f, 1.f));
+			actor->set_local_rotation(Quaternion::identity);
 		}
 	}
 
