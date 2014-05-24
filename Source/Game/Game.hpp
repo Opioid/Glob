@@ -15,7 +15,7 @@ void on_load_scene(Application &application);
 	
 void update(Application &application);
 
-Camera& get_camera();
+Camera& camera();
 
 void toggle_flashlight(bool just_activated, int data, float speed);
 

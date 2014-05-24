@@ -16,7 +16,7 @@ void Camera::set_locked(bool locked)
 	locked_ = locked;
 }
 
-float Camera::get_speed() const
+float Camera::speed() const
 {
 	return speed_;
 }

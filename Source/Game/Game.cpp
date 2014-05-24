@@ -13,7 +13,7 @@
 namespace game
 {
 
-Camera camera;
+Camera game_camera;
 
 scene::Light* flashlight;
 
@@ -27,7 +27,7 @@ float camera_fov = 50.f;
 
 bool on_pre_init(Application& app)
 {
-	const scripting::Script_engine& engine = app.get_script_tool().get_engine();
+	const scripting::Script_engine& engine = app.script_tool().engine();
 		
 	engine.register_variable("string initial_scene", &initial_scene);
 
@@ -38,16 +38,16 @@ bool on_pre_init(Application& app)
 
 bool on_post_init(Application& app)
 {
-	auto& scene = app.get_scene();
+	auto& scene = app.scene();
 
-	scene.get_complex_factories().register_factory(&interpolation_test_factory, "Interpolation_test");
-	scene.get_complex_factories().register_factory(&material_test_factory, "Material_test");
-    scene.get_complex_factories().register_factory(&shadowing_test_factory, "Shadowing_test");
-	scene.get_complex_factories().register_factory(&static_stress_test_factory, "Static_stress_test");
+	scene.complex_factories().register_factory(&interpolation_test_factory, "Interpolation_test");
+	scene.complex_factories().register_factory(&material_test_factory, "Material_test");
+	scene.complex_factories().register_factory(&shadowing_test_factory, "Shadowing_test");
+	scene.complex_factories().register_factory(&static_stress_test_factory, "Static_stress_test");
 
-	auto& camera = scene.get_camera();
+	auto& camera = scene.camera();
 
-	float aspect_ratio = float(configuration::virtual_size.x) / float(configuration::virtual_size.y);
+	float aspect_ratio = float(configuration::virtual_dimensions.x) / float(configuration::virtual_dimensions.y);
 	camera.set_projection(math::to_radians(camera_fov), aspect_ratio, 0.1f, 300.f, false);
 
 	camera.set_local_position(float3(0.f, 1.f, -10.f));
@@ -62,8 +62,8 @@ bool on_post_init(Application& app)
 
 void on_load_scene(Application& app)
 {
-	auto& scene = app.get_scene();
-	auto& resource_manager = app.get_resource_manager();
+	auto& scene = app.scene();
+	auto& resource_manager = app.resource_manager();
 
 	flashlight = scene.create_light(scene::Light::Type::Spot);
 	flashlight->set_casts_shadow(true);
@@ -76,16 +76,16 @@ void on_load_scene(Application& app)
 
 void update(Application& app)
 {
-	auto& camera = app.get_scene().get_camera();
+	auto& camera = app.scene().camera();
 
-    flashlight->set_local_position(camera.get_world_position() + 0.2f * camera.get_world_direction() + -0.2f * camera.get_world_right() + -0.2f * camera.get_world_up());
-    flashlight->set_local_rotation(camera.get_local_rotation());
+	flashlight->set_local_position(camera.world_position() + 0.2f * camera.world_direction() + -0.2f * camera.world_right() + -0.2f * camera.world_up());
+	flashlight->set_local_rotation(camera.local_rotation());
     flashlight->fix_world_transformation();
 }
 
-Camera& get_camera()
+Camera& camera()
 {
-	return camera;
+	return game_camera;
 }
 
 void toggle_flashlight(bool just_activated, int /*data*/, float /*speed*/)

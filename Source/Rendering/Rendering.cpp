@@ -9,7 +9,7 @@ bool show_fps = false;
 
 bool on_pre_init(Application& app)
 {
-	return app.get_script_tool().get_engine().register_variable("bool show_fps", &show_fps);
+	return app.script_tool().engine().register_variable("bool show_fps", &show_fps);
 }
 
 bool on_post_init(Application& /*app*/)
@@ -25,7 +25,7 @@ void render_gui(Application& app, Printer& printer)
 		printer.set_font("seguisb", 28);
 
 		printer.set_position(float2(0.f, 0.f));
-		printer.print("Fps: " + std::to_string(app.get_fps_counter().get_fps()));
+		printer.print("Fps: " + std::to_string(app.fps_counter().fps()));
 	}
 }
 

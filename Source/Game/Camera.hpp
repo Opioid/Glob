@@ -13,7 +13,7 @@ public:
 	bool is_locked() const;
 	void set_locked(bool locked);
 
-	float get_speed() const;
+	float speed() const;
 
 private:
 

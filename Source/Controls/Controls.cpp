@@ -39,7 +39,7 @@ namespace controls
 	{
 		app = application;
 
-		auto& mappings = app->get_control_mappings();
+		auto& mappings = app->control_mappings();
 
 		mappings.register_action("exit_action", exit_action);
 		mappings.register_action("cycle_application_mode", cycle_application_mode);
@@ -140,18 +140,18 @@ namespace controls
 			return;
 		}
 
-		if (Application::Mode::Simulation == app->get_mode())
+		if (Application::Mode::Simulation == app->mode())
 		{
 			app->set_mode(Application::Mode::Edit);
 
-			app->get_control_mappings().set_current_map("Edit");
-			game::get_camera().set_locked(false);
+			app->control_mappings().set_current_map("Edit");
+			game::camera().set_locked(false);
 		}
-		else if (Application::Mode::Edit == app->get_mode())
+		else if (Application::Mode::Edit == app->mode())
 		{
 			app->set_mode(Application::Mode::Simulation);
-			app->get_control_mappings().set_current_map("Simulation");
-			game::get_camera().set_locked(false);
+			app->control_mappings().set_current_map("Simulation");
+			game::camera().set_locked(false);
 		}
 	}
 
@@ -164,17 +164,17 @@ namespace controls
 
 		if (app->toggle_gui())
 		{
-			app->get_control_mappings().set_current_map("Gui");
+			app->control_mappings().set_current_map("Gui");
 		}
 		else
 		{
-			if (Application::Mode::Simulation == app->get_mode())
+			if (Application::Mode::Simulation == app->mode())
 			{
-				app->get_control_mappings().set_current_map("Simulation");
+				app->control_mappings().set_current_map("Simulation");
 			}
-			else if (Application::Mode::Edit == app->get_mode())
+			else if (Application::Mode::Edit == app->mode())
 			{
-				app->get_control_mappings().set_current_map("Edit");
+				app->control_mappings().set_current_map("Edit");
 			}
 		}
 	}
@@ -186,7 +186,7 @@ namespace controls
 			return;
 		}
 
-		app->get_renderer().set_render_bounding_volumes(!app->get_renderer().get_render_bounding_volumes());
+		app->renderer().set_render_bounding_volumes(!app->renderer().render_bounding_volumes());
 	}
 
 	void toggle_render_help_light(bool just_activated, int /*data*/, float /*speed*/)
@@ -196,7 +196,7 @@ namespace controls
 			return;
 		}
 
-		app->get_renderer().set_render_help_light(!app->get_renderer().get_render_help_light());
+		app->renderer().set_render_help_light(!app->renderer().render_help_light());
 	}
 
 /*
@@ -213,187 +213,187 @@ namespace controls
 	
     void move_forward(bool /*just_activated*/, int /*data*/, float speed)
 	{
-		auto& game_camera = game::get_camera();
+		auto& game_camera = game::camera();
 
 		if (game_camera.is_locked())
 		{
 			return;
 		}
 
-		float camera_speed = game_camera.get_speed();
+		float camera_speed = game_camera.speed();
 
-		scene::Camera& camera = app->get_scene().get_camera();
-		camera.translate(speed * camera_speed * camera.get_world_direction());
-	//	scene::scene.translate(scene::camera0, speed * scene::camera0.getSpeed() * scene::camera0.get_world_dir());
+		scene::Camera& camera = app->scene().camera();
+		camera.translate(speed * camera_speed * camera.world_direction());
+	//	scene::scene.translate(scene::camera0, speed * scene::camera0.getSpeed() * scene::camera0.world_direction());
 	}
 
     void move_backward(bool /*just_activated*/, int /*data*/, float speed)
 	{
-		auto& game_camera = game::get_camera();
+		auto& game_camera = game::camera();
 
 		if (game_camera.is_locked())
 		{
 			return;
 		}
 
-		float camera_speed = game_camera.get_speed();
+		float camera_speed = game_camera.speed();
 
-		scene::Camera& camera = app->get_scene().get_camera();
-		camera.translate(speed * camera_speed * -camera.get_world_direction());
-	//	scene::scene.translate(scene::camera0, speed * scene::camera0.getSpeed() * -scene::camera0.get_world_dir());
+		scene::Camera& camera = app->scene().camera();
+		camera.translate(speed * camera_speed * -camera.world_direction());
+	//	scene::scene.translate(scene::camera0, speed * scene::camera0.getSpeed() * -scene::camera0.world_direction());
 	}
 
     void strafe_left(bool /*just_activated*/, int /*data*/, float speed)
 	{
-		auto& game_camera = game::get_camera();
+		auto& game_camera = game::camera();
 
 		if (game_camera.is_locked())
 		{
 			return;
 		}
 
-		float camera_speed = game_camera.get_speed();
+		float camera_speed = game_camera.speed();
 
-		scene::Camera& camera = app->get_scene().get_camera();
-		camera.translate(speed * camera_speed * -camera.get_world_right());
-	//	scene::scene.translate(scene::camera0, speed * scene::camera0.getSpeed() * -scene::camera0.get_world_right());
+		scene::Camera& camera = app->scene().camera();
+		camera.translate(speed * camera_speed * -camera.world_right());
+	//	scene::scene.translate(scene::camera0, speed * scene::camera0.getSpeed() * -scene::camera0.world_right());
 	}
 
     void strafe_right(bool /*just_activated*/, int /*data*/, float speed)
 	{
-		auto& game_camera = game::get_camera();
+		auto& game_camera = game::camera();
 
 		if (game_camera.is_locked())
 		{
 			return;
 		}
 
-		float camera_speed = game_camera.get_speed();
+		float camera_speed = game_camera.speed();
 
-		scene::Camera& camera = app->get_scene().get_camera();
-		camera.translate(speed * camera_speed * camera.get_world_right());
-	//	scene::scene.translate(scene::camera0, speed * scene::camera0.getSpeed() * scene::camera0.get_world_right());
+		scene::Camera& camera = app->scene().camera();
+		camera.translate(speed * camera_speed * camera.world_right());
+	//	scene::scene.translate(scene::camera0, speed * scene::camera0.getSpeed() * scene::camera0.world_right());
 	}
 
     void move_up_y(bool /*just_activated*/, int /*data*/, float speed)
 	{
-		auto& game_camera = game::get_camera();
+		auto& game_camera = game::camera();
 
 		if (game_camera.is_locked())
 		{
 			return;
 		}
 
-		float camera_speed = game_camera.get_speed();
+		float camera_speed = game_camera.speed();
 
-		scene::Camera& camera = app->get_scene().get_camera();
+		scene::Camera& camera = app->scene().camera();
 		camera.translate(speed * camera_speed * float3(0.f, 0.5f, 0.f));
 	}
 
     void move_down_y(bool /*just_activated*/, int /*data*/, float speed)
 	{
-		auto& game_camera = game::get_camera();
+		auto& game_camera = game::camera();
 
 		if (game_camera.is_locked())
 		{
 			return;
 		}
 
-		float camera_speed = game_camera.get_speed();
+		float camera_speed = game_camera.speed();
 
-		scene::Camera& camera = app->get_scene().get_camera();
+		scene::Camera& camera = app->scene().camera();
 		camera.translate(speed * camera_speed * float3(0.f, -0.5f, 0.f));
 	}
 
     void rotate_y(bool /*just_activated*/, int data, float speed)
 	{
-		auto& game_camera = game::get_camera();
+		auto& game_camera = game::camera();
 
 		if (game_camera.is_locked())
 		{
 			return;
 		}
 
-		scene::Camera& camera = app->get_scene().get_camera();
+		scene::Camera& camera = app->scene().camera();
         camera.rotate(0.f, -float(data) * speed * 2.5f, 0.f);
 	}
 
     void rotate_z(bool /*just_activated*/, int data, float speed)
 	{
-		auto& game_camera = game::get_camera();
+		auto& game_camera = game::camera();
 
 		if (game_camera.is_locked())
 		{
 			return;
 		}
 
-		scene::Camera& camera = app->get_scene().get_camera();
+		scene::Camera& camera = app->scene().camera();
         camera.rotate(-float(data) * speed * 2.5f, 0.f, 0.f);
 	}
 
     void turn_left(bool /*just_activated*/, int /*data*/, float speed)
 	{
-		auto& game_camera = game::get_camera();
+		auto& game_camera = game::camera();
 
 		if (game_camera.is_locked())
 		{
 			return;
 		}
 
-		scene::Camera& camera = app->get_scene().get_camera();
+		scene::Camera& camera = app->scene().camera();
 		camera.rotate(0.f, speed * 1.5f, 0.f);
 	}
 
     void turn_right(bool /*just_activated*/, int /*data*/, float speed)
 	{
-		auto& game_camera = game::get_camera();
+		auto& game_camera = game::camera();
 
 		if (game_camera.is_locked())
 		{
 			return;
 		}
 
-		scene::Camera& camera = app->get_scene().get_camera();
+		scene::Camera& camera = app->scene().camera();
 		camera.rotate(0.f, -speed * 1.5f, 0.f);
 	}
 
     void turn_up(bool /*just_activated*/, int /*data*/, float speed)
 	{
-		auto& game_camera = game::get_camera();
+		auto& game_camera = game::camera();
 
 		if (game_camera.is_locked())
 		{
 			return;
 		}
 
-		scene::Camera& camera = app->get_scene().get_camera();
+		scene::Camera& camera = app->scene().camera();
 		camera.rotate(speed * 1.5f, 0.f, 0.f);
 	}
 
     void turn_down(bool /*just_activated*/, int /*data*/, float speed)
 	{
-		auto& game_camera = game::get_camera();
+		auto& game_camera = game::camera();
 
 		if (game_camera.is_locked())
 		{
 			return;
 		}
 
-		scene::Camera& camera = app->get_scene().get_camera();
+		scene::Camera& camera = app->scene().camera();
 		camera.rotate(-speed * 1.5f, 0.f, 0.f);
 	}
 
 	void lock_camera(bool /*just_activated*/, int /*data*/, float /*speed*/)
 	{
-		game::get_camera().set_locked(true);
+		game::camera().set_locked(true);
 
-		app->get_client().show_system_cursor(true);
+		app->client().show_system_cursor(true);
 	}
 
 	void unlock_camera()
 	{
-		game::get_camera().set_locked(false);
+		game::camera().set_locked(false);
 
-		app->get_client().show_system_cursor(false);
+		app->client().show_system_cursor(false);
 	}
 }
