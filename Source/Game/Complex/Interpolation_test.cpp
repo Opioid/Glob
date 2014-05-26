@@ -7,7 +7,7 @@
 namespace scene
 {
 
-Interpolation_test::Interpolation_test() : m_angle(0.f)
+Interpolation_test::Interpolation_test() : angle_(0.f)
 {}
 
 bool Interpolation_test::init(Scene& scene, Resource_manager& resource_manager)
@@ -19,35 +19,35 @@ bool Interpolation_test::init(Scene& scene, Resource_manager& resource_manager)
 	materials[0] = resource_manager.load<Material>("Materials/Stones.material");
 	materials[1] = resource_manager.load<Material>("Materials/Colors/Gold.material");
 
-	m_actor_a = scene.create_actor();
-    m_actor_a->create_surfaces(model, 1, &materials[0]);
-	m_actor_a->set_local_position(float3(-2.f, 0.f, 0.f));
+	actor_a_ = scene.create_actor();
+    actor_a_->create_surfaces(model, 1, &materials[0]);
+	actor_a_->set_local_position(float3(-2.f, 0.f, 0.f));
 
-	m_actor_b = scene.create_actor();
-    m_actor_b->create_surfaces(model, 1, &materials[1]);
-	m_actor_b->set_local_scale(float3(0.25f, 0.25f, 0.25f));
-	m_actor_b->set_local_position(float3(0, 1.5f, 0.f));
+	actor_b_ = scene.create_actor();
+    actor_b_->create_surfaces(model, 1, &materials[1]);
+	actor_b_->set_local_scale(float3(0.25f, 0.25f, 0.25f));
+	actor_b_->set_local_position(float3(0, 1.5f, 0.f));
 
-	m_actor_a->attach(m_actor_b);
+	actor_a_->attach(actor_b_);
 
 	return true;
 }
 
-void Interpolation_test::on_tick()
+void Interpolation_test::on_tick(float /*time_slice*/)
 {
 	Quaternion rotation_y;
-	set_rotation_y(rotation_y, m_angle);
+	set_rotation_y(rotation_y, angle_);
 
-	m_actor_a->set_local_position(float3(-2.f, 0.f, 0.f) * float3x3(rotation_y));
-	m_actor_a->set_local_rotation(rotation_y);
+	actor_a_->set_local_position(float3(-2.f, 0.f, 0.f) * float3x3(rotation_y));
+	actor_a_->set_local_rotation(rotation_y);
 
 	Quaternion rotation_x;
-	set_rotation_x(rotation_x, m_angle);
+	set_rotation_x(rotation_x, angle_);
 
-	m_actor_b->set_local_position(float3(0, 1.5f, 0.f) * float3x3(rotation_x));
-	m_actor_b->set_local_rotation(rotation_x);
+	actor_b_->set_local_position(float3(0, 1.5f, 0.f) * float3x3(rotation_x));
+	actor_b_->set_local_rotation(rotation_x);
 
-	m_angle += 0.03f;
+	angle_ += 0.03f;
 }
 
 Complex* Interpolation_test_factory::create_complex()

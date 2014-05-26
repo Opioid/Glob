@@ -16,14 +16,14 @@ public:
 
 	bool init(Scene& scene, Resource_manager& resource_manager);
 
-	void on_tick();
+	void on_tick(float time_slice);
 
 private:
 
-	Actor* m_actor_a;
-	Actor* m_actor_b;
+	Actor* actor_a_;
+	Actor* actor_b_;
 
-	float m_angle;
+	float angle_;
 };
 
 
