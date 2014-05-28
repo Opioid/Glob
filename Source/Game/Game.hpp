@@ -13,7 +13,7 @@ bool on_post_init(Application &application);
 	
 void on_load_scene(Application &application);
 	
-void update(Application &application);
+void update(Application &application, float time_slice);
 
 Camera& camera();
 

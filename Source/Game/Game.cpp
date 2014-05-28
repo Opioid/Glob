@@ -4,7 +4,6 @@
 #include "Application/Configuration.hpp"
 #include "Scene/Actor.hpp"
 #include "Math/Math.hpp"
-#include "Complex/Interpolation_test.hpp"
 #include "Complex/Material_test.hpp"
 #include "Complex/Shadowing_test.hpp"
 #include "Complex/Static_stress_test.hpp"
@@ -17,7 +16,6 @@ Camera game_camera;
 
 scene::Light* flashlight;
 
-scene::Interpolation_test_factory interpolation_test_factory;
 scene::Material_test_factory material_test_factory;
 scene::Shadowing_test_factory shadowing_test_factory;
 scene::Static_stress_test_factory static_stress_test_factory;
@@ -25,9 +23,9 @@ scene::Static_stress_test_factory static_stress_test_factory;
 std::string initial_scene = "Scenes/Test.scene";
 float camera_fov = 50.f;
 
-bool on_pre_init(Application& app)
+bool on_pre_init(Application& application)
 {
-	const scripting::Script_engine& engine = app.script_tool().engine();
+	const scripting::Script_engine& engine = application.script_tool().engine();
 		
 	engine.register_variable("string initial_scene", &initial_scene);
 
@@ -36,11 +34,10 @@ bool on_pre_init(Application& app)
 	return true;
 }
 
-bool on_post_init(Application& app)
+bool on_post_init(Application& application)
 {
-	auto& scene = app.scene();
+	auto& scene = application.scene();
 
-	scene.complex_factories().register_factory(&interpolation_test_factory, "Interpolation_test");
 	scene.complex_factories().register_factory(&material_test_factory, "Material_test");
 	scene.complex_factories().register_factory(&shadowing_test_factory, "Shadowing_test");
 	scene.complex_factories().register_factory(&static_stress_test_factory, "Static_stress_test");
@@ -52,7 +49,7 @@ bool on_post_init(Application& app)
 
 	camera.set_local_position(float3(0.f, 1.f, -10.f));
 		
-	if (!app.load_scene(initial_scene))
+	if (!application.load_scene(initial_scene))
 	{
 		return false;
 	}
@@ -60,10 +57,10 @@ bool on_post_init(Application& app)
 	return true;
 }
 
-void on_load_scene(Application& app)
+void on_load_scene(Application& application)
 {
-	auto& scene = app.scene();
-	auto& resource_manager = app.resource_manager();
+	auto& scene = application.scene();
+	auto& resource_manager = application.resource_manager();
 
 	flashlight = scene.create_light(scene::Light::Type::Spot);
 	flashlight->set_casts_shadow(true);
@@ -74,9 +71,9 @@ void on_load_scene(Application& app)
 	flashlight->set_visible(false);
 }
 
-void update(Application& app)
+void update(Application& application, float /*time_slice*/)
 {
-	auto& camera = app.scene().camera();
+	auto& camera = application.scene().camera();
 
 	flashlight->set_local_position(camera.world_position() + 0.2f * camera.world_direction() + -0.2f * camera.world_right() + -0.2f * camera.world_up());
 	flashlight->set_local_rotation(camera.local_rotation());

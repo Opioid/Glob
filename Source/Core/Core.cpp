@@ -1,6 +1,6 @@
 #include "Core.hpp"
-#include "../Rendering/Rendering.hpp"
-#include "../Game/Game.hpp"
+#include "Rendering/Rendering.hpp"
+#include "Game/Game.hpp"
 #include "../Controls/Controls.hpp"
 
 namespace core
@@ -44,14 +44,14 @@ bool Glob_app::on_post_init()
 	return true;
 }
 
-void Glob_app::on_load_scene()
+void Glob_app::on_scene_loaded()
 {
 	game::on_load_scene(*this);
 }
 
-void Glob_app::on_tick()
+void Glob_app::on_tick(float time_slice)
 {
-	game::update(*this);
+	game::update(*this, time_slice);
 }
 
 void Glob_app::on_render_gui(rendering::Printer& printer)

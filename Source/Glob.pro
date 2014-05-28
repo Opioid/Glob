@@ -83,6 +83,8 @@ win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../Libraries/angelsc
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../Libraries/angelscript_2.28.2/angelscript/lib/ -langelscript64d
 else:unix: LIBS += -langelscript
 
+win32:INCLUDEPATH += $$PWD/../../../Libraries/angelscript_2.28.2/angelscript/include
+
 # Freeimage ----------------------------------------
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../Libraries/FreeImage-3.16.0/Dist/ -lFreeImage
