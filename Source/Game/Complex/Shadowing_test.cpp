@@ -4,7 +4,7 @@
 #include "Scene/Static_prop.hpp"
 #include "Scene/Model.hpp"
 #include "Rendering/Resource_view.hpp"
-#include "Math/Quaternion.hpp"
+#include "Math/Quaternion.inl"
 #include "Math/Math.hpp"
 
 namespace scene
@@ -61,7 +61,7 @@ bool Shadowing_test::init(Scene& scene, Resource_manager& resource_manager)
 		light->set_casts_shadow(true);
         light->set_color(rendering::Color3(1.f, 0.875f, 0.8f));
         light->set_lumen(1.f);
-		Quaternion rot;
+		quaternion rot;
 		::set_rotation(rot, float3(-1.f, -1.f, -1.f), 1.f);
 		light->set_local_rotation(rot);
 	}
@@ -74,7 +74,7 @@ bool Shadowing_test::init(Scene& scene, Resource_manager& resource_manager)
 		light->set_texture(resource_manager.load<rendering::Shader_resource_view>("Textures/Light/Flashlight_0.dds"));
 		light->set_fov(math::to_radians(45.f));
 		light->set_local_position(float3(9.5f, 8.f, 7.5f));
-		Quaternion rot;
+		quaternion rot;
 		::set_rotation(rot, float3(-1.f, 1.f, -1.f), 1.f);
 		light->set_local_rotation(rot);
 	}

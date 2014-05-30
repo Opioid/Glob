@@ -2,6 +2,7 @@
 #include "Rendering/Rendering.hpp"
 #include "Game/Game.hpp"
 #include "../Controls/Controls.hpp"
+#include "Math/Vector.inl"
 
 namespace core
 {

@@ -1,6 +1,7 @@
 #include "Rendering.hpp"
 #include "Application/Application.hpp"
 #include "Rendering/Printer.hpp"
+#include "Math/Vector.inl"
 
 namespace rendering
 {

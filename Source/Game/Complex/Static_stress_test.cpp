@@ -3,6 +3,7 @@
 #include "Scene/Scene.hpp"
 #include "Scene/Static_prop.hpp"
 #include "Scene/Model.hpp"
+#include "Math/Quaternion.inl"
 
 namespace scene
 {
@@ -59,7 +60,7 @@ bool Static_stress_test::init(Scene& scene, Resource_manager& resource_manager)
 		light->set_color(rendering::Color3(0.6f, 0.5f, 0.4f));
 		light->set_lumen(1.f);
 		light->set_casts_shadow(false);
-		Quaternion rot;
+		quaternion rot;
 		set_rotation(rot, normalize(float3(-1.f, 1.f, -1.f)), 1.f);
 		light->set_local_rotation(rot);
 		light->fix_world_transformation();

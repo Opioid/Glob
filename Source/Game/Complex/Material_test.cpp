@@ -3,6 +3,7 @@
 #include "Scene/Scene.hpp"
 #include "Scene/Static_prop.hpp"
 #include "Scene/Model.hpp"
+#include "Math/Quaternion.inl"
 
 namespace scene
 {
@@ -43,7 +44,7 @@ bool Material_test::init(Scene& scene, Resource_manager& resource_manager)
 			actor->create_surfaces(sphereModel, 1, &material);
 			actor->set_local_position(float3(1.f - float(numX) + 2.f * float(x), 1.f - float(numY) + 2.f * float(y), 13.f));
 			actor->set_local_scale(float3(1.f, 1.f, 1.f));
-			actor->set_local_rotation(Quaternion::identity);
+			actor->set_local_rotation(quaternion::identity);
 		}
 	}
 
@@ -52,7 +53,7 @@ bool Material_test::init(Scene& scene, Resource_manager& resource_manager)
 	light->set_color(rendering::Color3(1.f, 1.f, 1.f));
 	light->set_lumen(0.75f);
 	light->set_casts_shadow(true);
-	Quaternion rot;
+	quaternion rot;
 	::set_rotation(rot, normalize(float3(-1.f, 1.f, 1.f)), 1.f);
 	light->set_local_rotation(rot);
 	*/
