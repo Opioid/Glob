@@ -1,7 +1,7 @@
 #include "Material_test.hpp"
 #include "Resources/Resource_manager.hpp"
 #include "Scene/Scene.hpp"
-#include "Scene/Static_prop.hpp"
+#include "Scene/Actor.hpp"
 #include "Scene/Model.hpp"
 #include "Math/Quaternion.inl"
 
