@@ -4,6 +4,7 @@
 #include "Application/Configuration.hpp"
 #include "Scene/Actor.hpp"
 #include "Math/Math.hpp"
+#include "Particles/Particles.hpp"
 #include "Complex/Material_test.hpp"
 #include "Complex/Shadowing_test.hpp"
 #include "Complex/Static_stress_test.hpp"
@@ -36,6 +37,11 @@ bool on_pre_init(Application& application)
 
 bool on_post_init(Application& application)
 {
+	if (!init_particles(application))
+	{
+		return false;
+	}
+
 	auto& scene = application.scene();
 
 	scene.complex_factories().register_factory(&material_test_factory, "Material_test");
