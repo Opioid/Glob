@@ -3,6 +3,7 @@
 #include "Resources/Resource_manager.hpp"
 #include "Scene/Static_prop.hpp"
 #include "Scene/Model.hpp"
+#include "Scene/Material.hpp"
 #include "Rendering/Resource_view.hpp"
 #include "Math/Quaternion.inl"
 #include "Math/Math.hpp"
