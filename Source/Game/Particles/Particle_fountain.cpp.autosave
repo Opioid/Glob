@@ -47,7 +47,7 @@ void Particle_fountain_factory::Particle_fountain_system::private_on_tick(const 
 			vertices[i].properties.x = math::random(0.025f, 0.05f);
 
 			properties_[i].age = math::random(0.f, max_age_);
-			properties_[i].direction = 0.1f * normalize(float3(math::random(-0.01f, 0.01f), 0.05f, math::random(-0.01f, 0.01f)));
+			properties_[i].direction = 0.1f * normalize(float3(math::random(-0.01f, 0.01f), 0.1f, math::random(-0.01f, 0.01f)));
 		}
 
 		properties_[i].direction -= time_slice * float3(0.f, 0.1f, 0.f);

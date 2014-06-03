@@ -20,7 +20,22 @@ private:
 
 	public:
 
-		virtual void on_tick(float time_slice);
+		Particle_fountain_system(uint32_t num_particles);
+		~Particle_fountain_system();
+
+	private:
+
+		virtual void private_on_tick(const Particle_effect& effect, float time_slice);
+
+		struct Particle_properties
+		{
+			float3 direction;
+			float  age;
+		};
+
+		Particle_properties* properties_;
+
+		const float max_age_;
 	};
 };
 
