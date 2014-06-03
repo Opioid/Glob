@@ -3,6 +3,7 @@
 #include "Scene/Scene.hpp"
 #include "Scene/Static_prop.hpp"
 #include "Scene/Model.hpp"
+#include "Scene/Material.hpp"
 #include "Math/Quaternion.inl"
 
 namespace scene

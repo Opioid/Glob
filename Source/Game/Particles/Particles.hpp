@@ -5,6 +5,6 @@ class Application;
 namespace game
 {
 
-bool init_particles(Application &application);
+bool init_particles(Application& application);
 
 }
