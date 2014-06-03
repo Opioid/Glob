@@ -2,6 +2,7 @@
 #include "Scene/Particles/Particle_effect.hpp"
 #include "Scene/Material.hpp"
 #include "Math/Math.hpp"
+#include "Math/Vector.inl"
 
 namespace scene
 {
