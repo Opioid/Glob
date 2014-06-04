@@ -37,11 +37,11 @@ Particle_smoke_factory::Particle_smoke_system::~Particle_smoke_system()
 	delete [] properties_;
 }
 
-void Particle_smoke_factory::Particle_smoke_system::private_on_tick(const Particle_effect& effect, float time_slice)
+void Particle_smoke_factory::Particle_smoke_system::private_on_tick(float time_slice)
 {
 	Vertex* vertices = current_vertices();
 
-	const float3 position = effect.world_position();
+	const float3 position = parent()->world_position();
 
 	for (uint32_t i = 0; i < num_particles(); ++i)
 	{

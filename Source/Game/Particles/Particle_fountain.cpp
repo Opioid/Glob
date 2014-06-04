@@ -23,9 +23,14 @@ Particle_fountain_factory::Particle_fountain_system::Particle_fountain_system(ui
 	properties_(new Particle_properties[num_particles]),
 	max_age_(3.f)
 {
+	Vertex* vertices = current_vertices();
+
 	for (uint32_t i = 0; i < this->num_particles(); ++i)
 	{
 		properties_[i].age = max_age_;
+
+		vertices[i].properties.y = 1.f;
+		vertices[i].properties.z = 1.f;
 	}
 }
 
@@ -34,11 +39,11 @@ Particle_fountain_factory::Particle_fountain_system::~Particle_fountain_system()
 	delete [] properties_;
 }
 
-void Particle_fountain_factory::Particle_fountain_system::private_on_tick(const Particle_effect& effect, float time_slice)
+void Particle_fountain_factory::Particle_fountain_system::private_on_tick(float time_slice)
 {
 	Vertex* vertices = current_vertices();
 
-	const float3 position = effect.world_position();
+	const float3 position = parent()->world_position();
 
 	for (uint32_t i = 0; i < num_particles(); ++i)
 	{

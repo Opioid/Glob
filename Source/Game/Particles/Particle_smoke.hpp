@@ -25,7 +25,7 @@ private:
 
 	private:
 
-		virtual void private_on_tick(const Particle_effect& effect, float time_slice);
+		virtual void private_on_tick(float time_slice);
 
 		struct Particle_properties
 		{
