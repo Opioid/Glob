@@ -11,7 +11,7 @@ bool Particle_fountain_factory::init_particle_effect(Particle_effect& effect)
 {
 	effect.reserve(1);
 
-	Particle_system* system = new Particle_fountain_system(256);
+	Particle_system* system = new Particle_fountain_system(512);
 
 	effect.set_system(0, system);
 
