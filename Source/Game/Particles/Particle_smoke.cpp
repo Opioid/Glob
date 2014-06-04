@@ -49,42 +49,25 @@ void Particle_smoke_factory::Particle_smoke_system::private_on_tick(float time_s
 		{
 			vertices[i].position = position + 0.2f * math::random_disk();
 			vertices[i].properties.x = math::random(0.2f, 0.35f);
+			vertices[i].properties.y = math::random(0.f, math::pi_mul_2);
 
 			properties_[i].birth_age = math::random(0.f, 0.4f * max_age_);
 			properties_[i].age = properties_[i].birth_age;
 			properties_[i].direction = 0.25f * float3(0.f, 1.f, 0.f);
 
-			properties_[i].direction.x += math::random(-1.f, 1.f) * 0.1f;
-			properties_[i].direction.y += math::random(-1.f, 1.f) * 0.1f;
-			properties_[i].direction.z += math::random(-1.f, 1.f) * 0.1f;
+			properties_[i].direction.x += math::random(-1.f, 1.f) * 0.075f;
+			properties_[i].direction.y += math::random(-1.f, 1.f) * 0.075f;
+			properties_[i].direction.z += math::random(-1.f, 1.f) * 0.075f;
 		}
 
 		vertices[i].position     += time_slice * (properties_[i].direction + float3(0.f, 0.8f, 0.f));
 		vertices[i].properties.x += time_slice * 0.075f;
+		vertices[i].properties.y += time_slice * 0.3f;
 
 		float ratio = (properties_[i].age - properties_[i].birth_age) / (max_age_ - properties_[i].birth_age);
 		vertices[i].properties.z = std::sin(math::pi * ratio) * 0.6f;
 
 		properties_[i].age += time_slice;
-
-
-
-
-		/*
-		if (max_age_ <= properties_[i].age)
-		{
-			vertices[i].position = position;
-			vertices[i].properties.x = math::random(0.025f, 0.05f);
-
-			properties_[i].age = math::random(0.f, max_age_);
-			properties_[i].direction = 0.1f * normalize(float3(math::random(-0.01f, 0.01f), 0.05f, math::random(-0.01f, 0.01f)));
-		}
-
-		properties_[i].direction -= time_slice * float3(0.f, 0.1f, 0.f);
-		vertices[i].position += properties_[i].direction;
-
-		properties_[i].age += time_slice;
-		*/
 	}
 }
 
