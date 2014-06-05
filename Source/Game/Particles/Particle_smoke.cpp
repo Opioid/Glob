@@ -11,7 +11,7 @@ bool Particle_smoke_factory::init_particle_effect(Particle_effect& effect)
 {
 	effect.reserve(1);
 
-	Particle_system* system = new Particle_smoke_system(96);
+	Particle_system* system = new Particle_smoke_system(64);
 
 	effect.set_system(0, system);
 
@@ -47,17 +47,17 @@ void Particle_smoke_factory::Particle_smoke_system::private_on_tick(float time_s
 	{
 		if (properties_[i].age >= max_age_)
 		{
-			vertices[i].position = position + 0.2f * math::random_disk();
-			vertices[i].properties.x = math::random(0.2f, 0.35f);
+			vertices[i].position = position + 0.15f * math::random_disk();
+			vertices[i].properties.x = math::random(0.15f, 0.3f);
 			vertices[i].properties.y = math::random(0.f, math::pi_mul_2);
 
-			properties_[i].birth_age = math::random(0.f, 0.4f * max_age_);
+			properties_[i].birth_age = math::random(0.f, 0.35f * max_age_);
 			properties_[i].age = properties_[i].birth_age;
 			properties_[i].direction = 0.25f * float3(0.f, 1.f, 0.f);
 
-			properties_[i].direction.x += math::random(-1.f, 1.f) * 0.075f;
-			properties_[i].direction.y += math::random(-1.f, 1.f) * 0.075f;
-			properties_[i].direction.z += math::random(-1.f, 1.f) * 0.075f;
+			properties_[i].direction.x += math::random(-1.f, 1.f) * 0.1f;
+			properties_[i].direction.y += math::random(-1.f, 1.f) * 0.1f;
+			properties_[i].direction.z += math::random(-1.f, 1.f) * 0.1f;
 		}
 
 		vertices[i].position     += time_slice * (properties_[i].direction + float3(0.f, 0.8f, 0.f));
