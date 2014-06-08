@@ -23,13 +23,13 @@ Particle_fountain_factory::Particle_fountain_system::Particle_fountain_system(ui
 	properties_(new Particle_properties[num_particles]),
 	max_age_(3.f)
 {
-	Vertex* vertices = current_vertices();
+	Vertex* vertices = this->vertices();
 
 	for (uint32_t i = 0; i < this->num_particles(); ++i)
 	{
 		properties_[i].age = max_age_;
 
-		vertices[i].angle = 1.f;
+		vertices[i].angle = 0.f;
 		vertices[i].alpha = 1.f;
 	}
 }
@@ -39,9 +39,9 @@ Particle_fountain_factory::Particle_fountain_system::~Particle_fountain_system()
 	delete [] properties_;
 }
 
-void Particle_fountain_factory::Particle_fountain_system::private_on_tick(float time_slice)
+void Particle_fountain_factory::Particle_fountain_system::on_update(float /*frame_time*/, float speed)
 {
-	Vertex* vertices = current_vertices();
+	Vertex* vertices = this->vertices();
 
 	const float3 position = parent()->world_position();
 
@@ -55,13 +55,13 @@ void Particle_fountain_factory::Particle_fountain_system::private_on_tick(float 
 			vertices[i].scale = float2(scale, scale);
 
 			properties_[i].age = math::random(0.f, max_age_);
-			properties_[i].direction = 0.1f * normalize(float3(math::random(-0.01f, 0.01f), 0.05f, math::random(-0.01f, 0.01f)));
+			properties_[i].direction = 3.f * normalize(float3(math::random(-0.01f, 0.01f), 0.05f, math::random(-0.01f, 0.01f)));
 		}
 
-		properties_[i].direction -= time_slice * float3(0.f, 0.1f, 0.f);
-		vertices[i].position += properties_[i].direction;
+		properties_[i].direction -= speed * float3(0.f, 2.f, 0.f);
+		vertices[i].position     += speed * properties_[i].direction;
 
-		properties_[i].age += time_slice;
+		properties_[i].age += speed;
 	}
 }
 

@@ -26,9 +26,9 @@ Particle_sprite_factory::Particle_sprite_system::Particle_sprite_system(uint32_t
 Particle_sprite_factory::Particle_sprite_system::~Particle_sprite_system()
 {}
 
-void Particle_sprite_factory::Particle_sprite_system::private_on_tick(float time_slice)
+void Particle_sprite_factory::Particle_sprite_system::on_update(float /*frame_time*/, float speed)
 {
-	Vertex& vertex = current_vertices()[0];
+	Vertex& vertex = vertices()[0];
 
 	vertex.position = parent_->world_position();
 	vertex.scale = float2(0.4f, 0.4f);
@@ -38,7 +38,7 @@ void Particle_sprite_factory::Particle_sprite_system::private_on_tick(float time
 
 	if (material_->is_array())
 	{
-		index_ += 16.f * time_slice;
+		index_ += 16.f * speed;
 
 		float max_index = static_cast<float>(material_->textures()[0]->description().num_layers);
 

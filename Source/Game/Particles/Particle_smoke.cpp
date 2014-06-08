@@ -23,7 +23,7 @@ Particle_smoke_factory::Particle_smoke_system::Particle_smoke_system(uint32_t nu
 	properties_(new Particle_properties[num_particles]),
 	max_age_(5.f)
 {
-	Vertex* vertices = current_vertices();
+	Vertex* vertices = this->vertices();
 
 	for (uint32_t i = 0; i < num_particles; ++i)
 	{
@@ -37,9 +37,9 @@ Particle_smoke_factory::Particle_smoke_system::~Particle_smoke_system()
 	delete [] properties_;
 }
 
-void Particle_smoke_factory::Particle_smoke_system::private_on_tick(float time_slice)
+void Particle_smoke_factory::Particle_smoke_system::on_update(float /*frame_time*/, float speed)
 {
-	Vertex* vertices = current_vertices();
+	Vertex* vertices = this->vertices();
 
 	const float3 position = parent()->world_position();
 
@@ -62,14 +62,14 @@ void Particle_smoke_factory::Particle_smoke_system::private_on_tick(float time_s
 			properties_[i].direction.z += math::random(-1.f, 1.f) * 0.1f;
 		}
 
-		vertices[i].position     += time_slice * (properties_[i].direction + float3(0.f, 0.8f, 0.f));
-		vertices[i].scale += time_slice * float2(0.075f, 0.075);
-		vertices[i].angle += time_slice * 0.3f;
+		vertices[i].position += speed * (properties_[i].direction + float3(0.f, 0.8f, 0.f));
+		vertices[i].scale	 += speed * float2(0.075f, 0.075);
+		vertices[i].angle	 += speed * 0.3f;
 
 		float ratio = (properties_[i].age - properties_[i].birth_age) / (max_age_ - properties_[i].birth_age);
 		vertices[i].alpha = std::sin(math::pi * ratio) * 0.6f;
 
-		properties_[i].age += time_slice;
+		properties_[i].age += speed;
 	}
 }
 

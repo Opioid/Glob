@@ -25,7 +25,7 @@ private:
 
 	private:
 
-		virtual void private_on_tick(float time_slice);
+		virtual void on_update(float frame_time, float speed);
 
 		struct Particle_properties
 		{
