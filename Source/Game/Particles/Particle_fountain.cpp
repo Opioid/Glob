@@ -29,8 +29,8 @@ Particle_fountain_factory::Particle_fountain_system::Particle_fountain_system(ui
 	{
 		properties_[i].age = max_age_;
 
-		vertices[i].properties.y = 1.f;
-		vertices[i].properties.z = 1.f;
+		vertices[i].angle = 1.f;
+		vertices[i].alpha = 1.f;
 	}
 }
 
@@ -50,7 +50,9 @@ void Particle_fountain_factory::Particle_fountain_system::private_on_tick(float 
 		if (max_age_ <= properties_[i].age)
 		{
 			vertices[i].position = position;
-			vertices[i].properties.x = math::random(0.025f, 0.05f);
+
+			float scale = math::random(0.025f, 0.05f);
+			vertices[i].scale = float2(scale, scale);
 
 			properties_[i].age = math::random(0.f, max_age_);
 			properties_[i].direction = 0.1f * normalize(float3(math::random(-0.01f, 0.01f), 0.05f, math::random(-0.01f, 0.01f)));
