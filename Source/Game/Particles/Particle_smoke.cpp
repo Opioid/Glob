@@ -67,7 +67,7 @@ void Particle_smoke_factory::Particle_smoke_system::on_update(float /*frame_time
 		vertices[i].angle	 += speed * 0.3f;
 
 		float ratio = (properties_[i].age - properties_[i].birth_age) / (max_age_ - properties_[i].birth_age);
-		vertices[i].alpha = std::sin(math::pi * ratio) * 0.6f;
+		vertices[i].alpha = std::sin(math::pi * ratio);
 
 		properties_[i].age += speed;
 	}
