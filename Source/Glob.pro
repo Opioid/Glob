@@ -85,11 +85,12 @@ else:unix: LIBS += -langelscript
 
 win32:INCLUDEPATH += $$PWD/../../../Libraries/angelscript_2.28.2/angelscript/include
 
-# Freeimage ----------------------------------------
+# WEBP ----------------------------------------
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../Libraries/FreeImage-3.16.0/Dist/ -lFreeImage
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../Libraries/FreeImage-3.16.0/Dist/ -lFreeImaged
-else:unix: LIBS += -lfreeimage
+win32: LIBS += -L$$PWD/../../../Libraries/libwebp-0.4.0/lib/ -llibwebp
+else:unix: LIBS += -L$$PWD/../../../Libraries/libwebp-0.4.0/lib/ -lwebp
+
+# phtread ----------------------------------------
 
 unix: LIBS += -lpthread
 
