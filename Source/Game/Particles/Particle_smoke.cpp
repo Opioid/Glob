@@ -63,7 +63,7 @@ void Particle_smoke_factory::Particle_smoke_system::on_update(float /*frame_time
 		}
 
 		vertices[i].position += speed * (properties_[i].direction + float3(0.f, 0.8f, 0.f));
-		vertices[i].scale	 += speed * float2(0.075f, 0.075);
+		vertices[i].scale	 += speed * float2(0.075f, 0.075f);
 		vertices[i].angle	 += speed * 0.3f;
 
 		float ratio = (properties_[i].age - properties_[i].birth_age) / (max_age_ - properties_[i].birth_age);
