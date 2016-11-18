@@ -22,46 +22,46 @@ DEPENDPATH += $$PWD/../../Substitute/Source
 
 # Core ----------------------------------------
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_3_0_MSVC2013_64bit-Release/Core/release/ -lCore
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_3_0_MSVC2013_64bit-Debug/Core/debug -lCore
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_5_1_MSVC2013_64bit-Release/Core/release/ -lCore
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_5_1_MSVC2013_64bit-Debug/Core/debug -lCore
 else:unix:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Clang_64bit-Release/Core/ -lCore
 else:unix:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Clang_64bit-Debug/Core/ -lCore
 
 INCLUDEPATH += $$PWD/../../Substitute/Source/Core
 DEPENDPATH += $$PWD/../../Substitute/Source/Core
 
-win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_3_0_MSVC2013_64bit-Release/Core/release/Core.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_3_0_MSVC2013_64bit-Debug/Core/debug/Core.lib
+win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_5_1_MSVC2013_64bit-Release/Core/release/Core.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_5_1_MSVC2013_64bit-Debug/Core/debug/Core.lib
 else:unix:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Clang_64bit-Release/Core/libCore.a
 else:unix:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Clang_64bit-Debug/Core/libCore.a
 
 # Backend ----------------------------------------
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_3_0_MSVC2013_64bit-Release/Backend/release/ -lBackend
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_3_0_MSVC2013_64bit-Debug/Backend/debug/ -lBackend
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_5_1_MSVC2013_64bit-Release/Backend/release/ -lBackend
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_5_1_MSVC2013_64bit-Debug/Backend/debug/ -lBackend
 else:unix:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Clang_64bit-Release/Backend/ -lBackend
 else:unix:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Clang_64bit-Debug/Backend/ -lBackend
 
 INCLUDEPATH += $$PWD/../../Substitute/Source/Backend
 DEPENDPATH += $$PWD/../../Substitute/Source/Backend
 
-win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_3_0_MSVC2013_64bit-Release/Backend/release/Backend.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_3_0_MSVC2013_64bit-Debug/Backend/debug/Backend.lib
+win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_5_1_MSVC2013_64bit-Release/Backend/release/Backend.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_5_1_MSVC2013_64bit-Debug/Backend/debug/Backend.lib
 else:unix:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Clang_64bit-Release/Backend/libBackend.a
 else:unix:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Clang_64bit-Debug/Backend/libBackend.a
 
 # Base ----------------------------------------
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_3_0_MSVC2013_64bit-Release/Base/release/ -lBase
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_3_0_MSVC2013_64bit-Debug/Base/debug/ -lBase
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_5_1_MSVC2013_64bit-Release/Base/release/ -lBase
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_5_1_MSVC2013_64bit-Debug/Base/debug/ -lBase
 else:unix:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Clang_64bit-Release/Base/ -lBase
 else:unix:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Substitute/build-Substitute-Desktop_Clang_64bit-Debug/Base/ -lBase
 
 INCLUDEPATH += $$PWD/../../Substitute/Source/Base
 DEPENDPATH += $$PWD/../../Substitute/Source/Base
 
-win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_3_0_MSVC2013_64bit-Release/Base/release/Base.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_3_0_MSVC2013_64bit-Debug/Base/debug/Base.lib
+win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_5_1_MSVC2013_64bit-Release/Base/release/Base.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Qt_5_5_1_MSVC2013_64bit-Debug/Base/debug/Base.lib
 else:unix:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Clang_64bit-Release/Base/libBase.a
 else:unix:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Substitute/build-Substitute-Desktop_Clang_64bit-Debug/Base/libBase.a
 
